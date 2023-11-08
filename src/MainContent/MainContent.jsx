@@ -13,10 +13,10 @@ import {setCategoryId} from '../redux/Slices/filterSlice';
 const MainContent = () => {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
+  const sortType = useSelector((state) => state.filter.sort.sortProperty);
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortType, setSortType] = useState({name: 'популярности', sortProperty: 'rating'});
   const [currentPage, setCurrentPage] = useState(1);
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -25,8 +25,8 @@ const MainContent = () => {
   useEffect(() => {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const sortBy = sortType.sortProperty.replace('-', '');
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortType.replace('-', '');
+    const order = sortType.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
     fetch(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `).then(res => {
       return res.json();
@@ -47,7 +47,7 @@ const MainContent = () => {
     <div>
       <div className={styles.content__top}>
         <Filters value={categoryId} onClickCategory={onChangeCategory}/>
-        <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)}/>
+        <Sort/>
       </div>
       <div className={styles.content}>
         <h2 className={styles.content__title}>Все пиццы</h2>
