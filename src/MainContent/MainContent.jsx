@@ -9,6 +9,7 @@ import Pagination from '../Pagination/Pagination';
 import {SearchContext} from '../App';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCategoryId} from '../redux/Slices/filterSlice';
+import axios from 'axios';
 
 const MainContent = () => {
   const dispatch = useDispatch();
@@ -22,16 +23,16 @@ const MainContent = () => {
     dispatch(setCategoryId(id));
   };
 
+
   useEffect(() => {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
-    fetch(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `).then(res => {
-      return res.json();
-    }).then((arr) => {
-      setItems(arr);
+
+    axios.get(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then(res => {
+      setItems(res.data);
       setIsLoading(false);
     });
   }, [categoryId, sortType, searchValue, currentPage]);
