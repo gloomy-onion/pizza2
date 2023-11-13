@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import PizzaBlock from '../PizzaBlock/PizzaBlock';
 import styles from './MainContent.module.scss';
 import Skeleton from '../PizzaBlock/Skeleton';
@@ -8,14 +8,22 @@ import {API_URL} from '../common/constants';
 import Pagination from '../Pagination/Pagination';
 import {SearchContext} from '../App';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCategoryId, setCurrentPage} from '../redux/Slices/filterSlice';
+import {setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterSlice';
 import axios from 'axios';
+import qs from 'qs';
+import {useNavigate} from 'react-router-dom';
+//почему он не импортируется?
+import {sortList} from '../Sort/constants';
 
 const MainContent = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
   const currentPage = useSelector((state) => state.filter.currentPage);
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  //он почему то через раз пишет что тут sort undefined, а если не пишет, то запрос не уходит и есть только прелоудер
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,9 +31,10 @@ const MainContent = () => {
     dispatch(setCategoryId(id));
   };
   const onChangePage = (number) => {
-    dispatch(setCurrentPage(number))
+    dispatch(setCurrentPage(number));
   };
-  useEffect(() => {
+
+  const fetchPizzas = () => {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sortType.replace('-', '');
@@ -35,6 +44,38 @@ const MainContent = () => {
       setItems(res.data);
       setIsLoading(false);
     });
+  };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType,
+        categoryId,
+        currentPage
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = sortList.find(sortItem => sortItem.sortProperty === params.sortProperty);
+      dispatch(setFilters({
+        ...params,
+        sort,
+      }));
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzas = items.map((pizza) => (
