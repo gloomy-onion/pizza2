@@ -12,7 +12,6 @@ import {setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterS
 import axios from 'axios';
 import qs from 'qs';
 import {useNavigate} from 'react-router-dom';
-//почему он не импортируется?
 import {sortList} from '../Sort/constants';
 
 const MainContent = () => {
@@ -23,7 +22,6 @@ const MainContent = () => {
   const currentPage = useSelector((state) => state.filter.currentPage);
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
-  //он почему то через раз пишет что тут sort undefined, а если не пишет, то запрос не уходит и есть только прелоудер
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +59,7 @@ const MainContent = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = sortList.find(sortItem => sortItem.sortProperty === params.sortProperty);
+      const sort = sortList.find(sortItem => sortItem.sortProperty === params.sortType);
       dispatch(setFilters({
         ...params,
         sort,

@@ -12,7 +12,6 @@ const Search = () => {
     setSearchValue('');
     setValue('');
     inputRef.current.focus();
-    //  не пойму фокус подчеркивается желтым но при этом в браузере ошибки нет
   };
   const updateSearchValue = useCallback(
     debounce((value) => {
