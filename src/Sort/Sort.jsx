@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './Sort.module.scss';
 import {sortList} from './constants';
 import {useDispatch, useSelector} from 'react-redux';
@@ -7,7 +7,7 @@ import {setSort} from '../redux/Slices/filterSlice';
 const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
-
+  const sortRef = useRef();
   const [open, setOpen] = useState(false);
 
   const onClickList = (sortObj) => {
@@ -15,8 +15,19 @@ const Sort = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener('click', handleClickOutside);
+    return () =>
+      document.body.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
-    <div className={styles.sort}>
+    <div ref={sortRef} className={styles.sort}>
       <div className={styles.sort__label}>
         <div className={styles.sortLabel}/>
         <b>Сортировка по: </b>
