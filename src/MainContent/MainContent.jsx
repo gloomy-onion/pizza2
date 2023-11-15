@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import PizzaBlock from '../PizzaBlock/PizzaBlock';
 import styles from './MainContent.module.scss';
 import Skeleton from '../PizzaBlock/Skeleton';
@@ -8,32 +8,72 @@ import {API_URL} from '../common/constants';
 import Pagination from '../Pagination/Pagination';
 import {SearchContext} from '../App';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCategoryId} from '../redux/Slices/filterSlice';
+import {setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterSlice';
+import axios from 'axios';
+import qs from 'qs';
+import {useNavigate} from 'react-router-dom';
+import {sortList} from '../Sort/constants';
 
 const MainContent = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+  const currentPage = useSelector((state) => state.filter.currentPage);
   const categoryId = useSelector((state) => state.filter.categoryId);
+  const sortType = useSelector((state) => state.filter.sort.sortProperty);
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortType, setSortType] = useState({name: 'популярности', sortProperty: 'rating'});
-  const [currentPage, setCurrentPage] = useState(1);
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
+  };
 
-  useEffect(() => {
+  const fetchPizzas = () => {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const sortBy = sortType.sortProperty.replace('-', '');
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortType.replace('-', '');
+    const order = sortType.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
-    fetch(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search} `).then(res => {
-      return res.json();
-    }).then((arr) => {
-      setItems(arr);
+    axios.get(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then(res => {
+      setItems(res.data);
       setIsLoading(false);
     });
+  };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType,
+        categoryId,
+        currentPage
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = sortList.find(sortItem => sortItem.sortProperty === params.sortType);
+      dispatch(setFilters({
+        ...params,
+        sort,
+      }));
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzas = items.map((pizza) => (
@@ -47,7 +87,7 @@ const MainContent = () => {
     <div>
       <div className={styles.content__top}>
         <Filters value={categoryId} onClickCategory={onChangeCategory}/>
-        <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)}/>
+        <Sort/>
       </div>
       <div className={styles.content}>
         <h2 className={styles.content__title}>Все пиццы</h2>
@@ -58,7 +98,7 @@ const MainContent = () => {
           }
         </div>
       </div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+      <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
     </div>
   );
 };
