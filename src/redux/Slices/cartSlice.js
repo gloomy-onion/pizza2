@@ -15,6 +15,6 @@ const cartSlice = createSlice(
   }
 );
 
-export const {setCategoryId, setSort, setCurrentPage, setFilters} = cartSlice.actions;
+export const {} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -4,6 +4,7 @@ import cn from 'classnames';
 import cartImage from '../img/cartImage.svg';
 import trashBin from '../img/trashBin.svg'
 import {Link} from 'react-router-dom';
+import CartItem from './CartItem';
 
 const Cart = () => {
   return (
@@ -22,8 +23,7 @@ const Cart = () => {
               </div>
             </div>
             <div className={styles.content__items}>
-              <br/><br/><br/>
-              ЗДЕСЬ БУДУТ ПИЦЦЫ ЧЕСТНОЕ СЛОВО
+              <CartItem/>
             </div>
             <div className={styles.cart__bottom}>
               <div className={styles.cart__bottom_details}>
