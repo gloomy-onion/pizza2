@@ -4,7 +4,6 @@
     list-style-type: none;
     margin: 10px 0;
     padding: 0;
-
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
@@ -27,6 +26,10 @@
         color: #fff;
       }
     }
+  }
+  @media (max-width: 945px) {
+    overflow: auto;
+    width: 100%;
   }
 }
 

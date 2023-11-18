@@ -15,15 +15,16 @@ const Sort = () => {
     setOpen(false);
   };
 
+  const handleClickOutside = (e) => {
+    console.log(e.path);
+    const path = e.path || (e.composedPath && e.composedPath());
+    if (path && !path.includes(sortRef.current)) {
+      setOpen(false);
+    }};
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.path.includes(sortRef.current)) {
-        setOpen(false);
-      }
-    };
-    document.body.addEventListener('click', handleClickOutside);
-    return () =>
-      document.body.removeEventListener('click', handleClickOutside);
+    document.body.addEventListener('click', (e) => handleClickOutside(e));
+    return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
 
   return (
