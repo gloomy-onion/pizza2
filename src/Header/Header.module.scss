@@ -53,6 +53,7 @@
   cursor: pointer;
   border: 1px solid transparent;
   transition: background-color 10ms ease-in-out, border-color 10ms ease-in-out;
+  align-items: center;
 
   &__delimiter {
     width: 1px;

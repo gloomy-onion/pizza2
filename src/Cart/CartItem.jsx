@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Cart.module.scss'
+import styles from './Cart.module.scss';
 
 const CartItem = (props) => {
 
@@ -8,7 +8,7 @@ const CartItem = (props) => {
 
     <div className={styles.cart__item}>
       <div className={styles.cart__item__img}>
-        <img  src={imageUrl} alt={''}/>
+        <img src={imageUrl} alt={''}/>
       </div>
       <div className={styles.cart__item__info}>
         <h3>Название пиццы</h3>
