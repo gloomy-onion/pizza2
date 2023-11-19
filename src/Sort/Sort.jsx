@@ -16,7 +16,6 @@ const Sort = () => {
   };
 
   const handleClickOutside = (e) => {
-    console.log(e.path);
     const path = e.path || (e.composedPath && e.composedPath());
     if (path && !path.includes(sortRef.current)) {
       setOpen(false);

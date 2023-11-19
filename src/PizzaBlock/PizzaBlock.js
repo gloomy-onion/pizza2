@@ -14,7 +14,7 @@ const PizzaBlock = (props) => {
   const addedCount = cartItem ? cartItem.count : 0;
   const onClickAdd = () => {
     const item = {
-      id, title, price, imageUrl, type: typeNames[activeType], sizes: activeSize
+      id, title, price, imageUrl, type: typeNames[activeType], size: sizes[activeSize]
     };
     dispatch(addItem(item));
   };
@@ -41,7 +41,7 @@ const PizzaBlock = (props) => {
         </ul>
       </div>
       <div className={styles.pizzaBlock__bottom}>
-        <div className={styles.pizzaBlock__price}>{price} р.</div>
+        <div className={styles.pizzaBlock__price}>{price} ₽</div>
         <button onClick={onClickAdd} className={cn(styles.button, styles.button__outline, styles.button__add)}>
           <svg
             width="12"
