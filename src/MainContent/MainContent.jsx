@@ -32,7 +32,6 @@ const MainContent = () => {
   };
 
   const getPizzas = async () => {
-
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'asc' : 'desc';
@@ -63,6 +62,10 @@ const MainContent = () => {
         ...params,
         sort,
       }));
+      dispatch(fetchPizzas({
+        ...params,
+        sort,
+      }));
       isSearch.current = true;
     }
   }, []);
@@ -70,6 +73,7 @@ const MainContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
+      console.log(isSearch.current);
       getPizzas();
     }
     isSearch.current = false;
@@ -103,7 +107,6 @@ const MainContent = () => {
             </div>
           )
         }
-
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
     </div>

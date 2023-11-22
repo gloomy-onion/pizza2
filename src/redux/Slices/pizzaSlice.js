@@ -6,7 +6,9 @@ const initialState = {
   items: [],
   status: 'loading',
 };
-export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async ({params}) => {
+
+export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params) => {
+  console.log(params);
   const {sortBy, order, search, category, currentPage} = params;
   const {data} = await axios.get(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
   return data;
@@ -28,9 +30,9 @@ const pizzaSlice = createSlice(
       },
       [fetchPizzas.fulfilled]: (state, action) => {
         state.items = action.payload;
-        state.status = 'loading';
+        state.status = 'success';
       },
-      [fetchPizzas.rejected]: (state, action) => {
+      [fetchPizzas.rejected]: (state) => {
         state.status = 'error';
         state.items = [];
       },

@@ -13,8 +13,9 @@ const CartItem = (props) => {
     dispatch(minusItem({id}));
   };
   const onClickRemove = () => {
-    if (window.confirm('Вы уверены что хотите удалить?'))
+    if (window.confirm('Вы уверены что хотите удалить?')) {
       dispatch(removeItem(id));
+    }
   };
 
   return (
@@ -31,7 +32,6 @@ const CartItem = (props) => {
           disabled={count === 1}
           onClick={onClickMinus}
           className={styles.minusBtn}>
-
         </button>
         {count}
         <button
@@ -46,6 +46,7 @@ const CartItem = (props) => {
         <button onClick={onClickRemove} className={styles.removeBtn}>
         </button>
       </div>
-    </div>);
+    </div>
+  );
 };
 export default CartItem;

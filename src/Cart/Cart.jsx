@@ -11,12 +11,12 @@ import CartEmpty from './CartEmpty';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const {items, totalPrice} = useSelector(state => state.cart);
+  const {items, totalPrice, totalCount} = useSelector(state => state.cart);
   const onClickClear = () => {
-    if (window.confirm('Очистить корзину?'))
-      dispatch(clearItems);
+    if (window.confirm('Очистить корзину?')) {
+      dispatch(clearItems());
+    }
   };
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   if (!totalCount) {
     return <CartEmpty/>;
   }
@@ -50,9 +50,9 @@ const Cart = () => {
                 <Link to={'/'} className={cn(styles.button, styles.goBackBtn)}>
                   <span>Вернуться назад</span>
                 </Link>
-                <div className={cn(styles.button, styles.payBtn)}>
+                <button className={cn(styles.button, styles.payBtn)}>
                   <span>Оплатить сейчас</span>
-                </div>
+                </button>
               </div>
             </div>
           </div>
