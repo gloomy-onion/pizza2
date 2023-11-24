@@ -7,12 +7,12 @@
 
   &__cart {
     max-width: 820px;
-    margin: 90px auto;
+    margin: 30px auto;
   }
 }
 
 .content {
-  padding:0;
+  padding: 0;
 
   &__title {
     margin: 35px 0;
@@ -97,9 +97,8 @@
     width: 100%;
     border-top: 1px solid $gray-line;
     padding-top: 30px;
-    margin-top: 30px;
 
-    &_img {
+    &__img {
       display: flex;
       align-items: center;
       margin-right: 15px;
@@ -111,7 +110,7 @@
       }
     }
 
-    &-info {
+    &__info {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -130,13 +129,13 @@
       }
     }
 
-    &-count {
+    &__count {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 13%;
 
-      &-minus {
+      &__minus {
         svg {
           path:first-of-type {
             display: none;
@@ -170,7 +169,7 @@
       }
     }
 
-    &_price {
+    &__price {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -183,11 +182,10 @@
       }
     }
 
-    &_remove {
+    &__remove {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      width: 4%;
 
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
@@ -354,6 +352,101 @@
         margin: 10px 30px;
         text-decoration: none;
       }
+    }
+  }
+
+  .removeBtn {
+    border-radius: 50%;
+    border-color: darken($color: $gray-line, $amount: 10);
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      display: block;
+      background-color: darken($color: $gray-line, $amount: 10);
+      height: 2px;
+      top: 17px;
+      left: 10px;
+      right: 10px;
+      z-index: 9;
+      transform: rotate(45deg)
+    }
+
+    &::before {
+      content: " ";
+      position: absolute;
+      display: block;
+      background-color: darken($color: $gray-line, $amount: 10);
+      width: 2px;
+      left: 17px;
+      top: 10px;
+      bottom: 10px;
+      z-index: 9;
+      transform: rotate(45deg)
+    }
+
+    &:hover,
+    &:active {
+      border-color: darken($color: $gray-line, $amount: 10);
+      background-color: darken($color: $gray-line, $amount: 10);
+    }
+  }
+
+  .plusBtn {
+    border-radius: 50%;
+    border-color: $orange;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      display: block;
+      background-color: $orange;
+      height: 2px;
+      top: 17px;
+      left: 10px;
+      right: 10px;
+      z-index: 9;
+    }
+
+    &::before {
+      content: " ";
+      position: absolute;
+      display: block;
+      background-color: $orange;
+      width: 2px;
+      left: 17px;
+      top: 10px;
+      bottom: 10px;
+      z-index: 9;
+    }
+  }
+
+  .minusBtn {
+    border-radius: 50%;
+    border-color: $orange;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      display: block;
+      background-color: $orange;
+      height: 2px;
+      top: 17px;
+      left: 10px;
+      right: 10px;
+      z-index: 9;
     }
   }
 }

@@ -9,13 +9,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    @media (max-width: 645px) {
+    @media (max-width: 945px) {
       flex-direction: column;
-
-      .headerCart {
-        margin-top: 20px;
-      }
+      align-self: center
     }
   }
 }
@@ -57,6 +53,7 @@
   cursor: pointer;
   border: 1px solid transparent;
   transition: background-color 10ms ease-in-out, border-color 10ms ease-in-out;
+  align-items: center;
 
   &__delimiter {
     width: 1px;
