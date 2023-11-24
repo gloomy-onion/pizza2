@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params) => {
-  console.log(params);
   const {sortBy, order, search, category, currentPage} = params;
   const {data} = await axios.get(`${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
   return data;
