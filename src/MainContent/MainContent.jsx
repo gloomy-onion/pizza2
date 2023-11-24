@@ -73,7 +73,6 @@ const MainContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      console.log(isSearch.current);
       getPizzas();
     }
     isSearch.current = false;
