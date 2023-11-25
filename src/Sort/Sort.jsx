@@ -2,11 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './Sort.module.scss';
 import {sortList} from './constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {setSort} from '../redux/Slices/filterSlice';
+import {selectSort, setSort} from '../redux/Slices/filterSlice';
 
 const Sort = () => {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector(selectSort);
   const sortRef = useRef();
   const [open, setOpen] = useState(false);
 
@@ -19,7 +19,8 @@ const Sort = () => {
     const path = e.path || (e.composedPath && e.composedPath());
     if (path && !path.includes(sortRef.current)) {
       setOpen(false);
-    }};
+    }
+  };
 
   useEffect(() => {
     document.body.addEventListener('click', (e) => handleClickOutside(e));

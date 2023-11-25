@@ -5,9 +5,10 @@ import cartHeader from '../img/cartHeader.svg';
 import {Link} from 'react-router-dom';
 import Search from '../Search/Search';
 import {useSelector} from 'react-redux';
+import {selectCart} from '../redux/Slices/cartSlice';
 
 const Header = () => {
-  const {totalPrice, totalCount} = useSelector(state => state.cart);
+  const {totalPrice, totalCount} = useSelector(selectCart);
   return (
     <div className={styles.header}>
       <div className={styles.container}>

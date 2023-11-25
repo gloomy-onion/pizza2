@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import styles from './PizzaBlock.module.scss';
 import cn from 'classnames';
 import {useDispatch, useSelector} from 'react-redux';
-import {addItem} from '../redux/Slices/cartSlice';
+import {addItem, selectCartItemById} from '../redux/Slices/cartSlice';
 
 const PizzaBlock = (props) => {
   const {id, title, price, imageUrl, sizes, types} = props;
   const dispatch = useDispatch();
-  const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id));
+  const cartItem = useSelector(selectCartItemById(id));
   const typeNames = ['тонкое', 'традиционное'];
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);

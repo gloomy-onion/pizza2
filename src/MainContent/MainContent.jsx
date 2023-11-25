@@ -1,17 +1,16 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import PizzaBlock from '../PizzaBlock/PizzaBlock';
 import styles from './MainContent.module.scss';
 import Skeleton from '../PizzaBlock/Skeleton';
 import Filters from '../Filters/Filters';
 import Sort from '../Sort/Sort';
 import Pagination from '../Pagination/Pagination';
-import {SearchContext} from '../App';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterSlice';
+import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterSlice';
 import qs from 'qs';
 import {useNavigate} from 'react-router-dom';
 import {sortList} from '../Sort/constants';
-import {fetchPizzas} from '../redux/Slices/pizzaSlice';
+import {fetchPizzas, selectPizzaData} from '../redux/Slices/pizzaSlice';
 import NotFoundBlock from '../NotFound/NotFoundBlock';
 
 const MainContent = () => {
@@ -19,11 +18,9 @@ const MainContent = () => {
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const currentPage = useSelector((state) => state.filter.currentPage);
-  const {items, status} = useSelector((state) => state.pizza);
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
-  const {searchValue} = useContext(SearchContext);
+  const sortType = useSelector(state => state.filter.sort.sortProperty)
+  const {currentPage, categoryId, searchValue} = useSelector(selectFilter);
+  const {items, status} = useSelector(selectPizzaData);
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };

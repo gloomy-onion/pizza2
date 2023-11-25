@@ -6,12 +6,12 @@ import trashBin from '../img/trashBin.svg';
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 import {useDispatch, useSelector} from 'react-redux';
-import {clearItems} from '../redux/Slices/cartSlice';
+import {clearItems, selectCart} from '../redux/Slices/cartSlice';
 import CartEmpty from './CartEmpty';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const {items, totalPrice, totalCount} = useSelector(state => state.cart);
+  const {items, totalPrice, totalCount} = useSelector(selectCart);
   const onClickClear = () => {
     if (window.confirm('Очистить корзину?')) {
       dispatch(clearItems());
