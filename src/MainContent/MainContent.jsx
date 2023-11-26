@@ -8,7 +8,7 @@ import Pagination from '../Pagination/Pagination';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectFilter, setCategoryId, setCurrentPage, setFilters} from '../redux/Slices/filterSlice';
 import qs from 'qs';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {sortList} from '../Sort/constants';
 import {fetchPizzas, selectPizzaData} from '../redux/Slices/pizzaSlice';
 import NotFoundBlock from '../NotFound/NotFoundBlock';
@@ -76,10 +76,9 @@ const MainContent = () => {
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzas = items.map((pizza) => (
-    <PizzaBlock
-      key={pizza.title}
+    <Link key={pizza.title} to={`pizza/${pizza.id}`}><PizzaBlock
       {...pizza}
-    />
+    /></Link>
   ));
 
   return (
