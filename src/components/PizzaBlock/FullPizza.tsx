@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
-import {API_URL} from '../common/constants';
+import {API_URL} from '../../common/constants';
 
 const FullPizza = () => {
   const {id} = useParams();
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = useState<{
+    imageUrl: string,
+    title: string,
+    price: number,
+  }>({
+    imageUrl: '',
+    title: '',
+    price: 0,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,17 +21,16 @@ const FullPizza = () => {
       try {
         const {data} = await axios.get(`${API_URL}pizza/` + id);
         setPizza(data);
-        console.log(data);
       } catch (error) {
         alert('Ошибка');
-        navigate('/')
+        navigate('/');
       }
-    }
+    };
     fetchPizza();
   }, []);
 
-  if(!pizza) {
-    return 'Загрузка...'
+  if (!pizza) {
+    return <>'Загрузка...'</>;
   }
 
   return (
