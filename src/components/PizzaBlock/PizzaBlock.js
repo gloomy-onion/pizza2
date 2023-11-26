@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import styles from './PizzaBlock.module.scss';
 import cn from 'classnames';
 import {useDispatch, useSelector} from 'react-redux';
-import {addItem, selectCartItemById} from '../redux/Slices/cartSlice';
+import {addItem, selectCartItemById} from '../../redux/Slices/cartSlice';
+import {Link} from 'react-router-dom';
 
 const PizzaBlock = (props) => {
-  const {id, title, price, imageUrl, sizes, types} = props;
+  const {id, title, price, imageUrl, sizes, types, pizza} = props;
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const typeNames = ['тонкое', 'традиционное'];
@@ -21,12 +22,14 @@ const PizzaBlock = (props) => {
 
   return (
     <div className={styles.pizzaBlock}>
-      <img
-        className={styles.pizzaBlock__image}
-        src={imageUrl}
-        alt={'Pizza'}
-      />
-      <h4 className={styles.pizzaBlock__title}>{title}</h4>
+      <Link to={`pizza/${pizza.id}`}>
+        <img
+          className={styles.pizzaBlock__image}
+          src={imageUrl}
+          alt={'Pizza'}
+        />
+        <h4 className={styles.pizzaBlock__title}>{title}</h4>
+      </Link>
       <div className={styles.pizzaBlock__selector}>
         <ul>
           {types.map((type) => (

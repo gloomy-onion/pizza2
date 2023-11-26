@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './Sort.module.scss';
 import {sortList} from './constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectSort, setSort} from '../redux/Slices/filterSlice';
+import {selectSort, setSort} from '../../redux/Slices/filterSlice';
 
 const Sort = () => {
   const dispatch = useDispatch();

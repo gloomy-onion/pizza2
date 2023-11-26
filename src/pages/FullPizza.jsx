@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {API_URL} from '../common/constants';
 
 const FullPizza = () => {
   const {id} = useParams();
   const [pizza, setPizza] = useState();
-  useEffect(() => {
+  const navigate = useNavigate();
 
-    async function fetchPizza() {
+  useEffect(() => {
+    const fetchPizza = async () => {
       try {
         const {data} = await axios.get(`${API_URL}pizza/` + id);
         setPizza(data);
         console.log(data);
       } catch (error) {
         alert('Ошибка');
+        navigate('/')
       }
     }
     fetchPizza();

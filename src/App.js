@@ -1,32 +1,22 @@
 import './App.module.scss';
-import Header from './Header/Header';
-import styles from './App.module.scss';
-import Home from './pages/Home';
 import {Route, Routes} from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import CartPage from './pages/CartPage';
-import {createContext, useState} from 'react';
 import FullPizza from './pages/FullPizza';
+import MainLayout from './layouts/MainLayout';
+import MainContent from './components/MainContent/MainContent';
 
-export const SearchContext = createContext({});
 
 function App() {
-  const [searchValue, setSearchValue] = useState('');
-
   return (
-    <body>
-    <div className={styles.wrapper}>
-      <SearchContext.Provider value={{searchValue, setSearchValue}}>
-        <Header/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/pizza/:id" element={<FullPizza/>}/>
-          <Route path="/cart" element={<CartPage/>}/>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
-      </SearchContext.Provider>
-    </div>
-    </body>
+    <Routes>
+      <Route path="/" element={<MainLayout/>}>
+        <Route path="" element={<MainContent/>}/>
+        <Route path="pizza/:id" element={<FullPizza/>}/>
+        <Route path="cart" element={<CartPage/>}/>
+        <Route path="*" element={<NotFound/>}/>
+      </Route>
+    </Routes>
   );
 }
 

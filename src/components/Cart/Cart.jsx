@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './Cart.module.scss';
 import cn from 'classnames';
-import cartImage from '../img/cartImage.svg';
-import trashBin from '../img/trashBin.svg';
+import cartImage from '../../img/cartImage.svg';
+import trashBin from '../../img/trashBin.svg';
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 import {useDispatch, useSelector} from 'react-redux';
-import {clearItems, selectCart} from '../redux/Slices/cartSlice';
+import {clearItems, selectCart} from '../../redux/Slices/cartSlice';
 import CartEmpty from './CartEmpty';
 
 const Cart = () => {

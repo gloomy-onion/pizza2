@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cart.module.scss';
 import {useDispatch} from 'react-redux';
-import {addItem, minusItem, removeItem} from '../redux/Slices/cartSlice';
+import {addItem, minusItem, removeItem} from '../../redux/Slices/cartSlice';
 
 const CartItem = (props) => {
   const {imageUrl, id, title, price, count, type, size} = props;

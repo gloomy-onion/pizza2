@@ -1,11 +1,11 @@
 import React from 'react';
-import pizzaLogo from './../img/pizzaLogo.svg';
+import pizzaLogo from '../../img/pizzaLogo.svg';
 import styles from './Header.module.scss';
-import cartHeader from '../img/cartHeader.svg';
+import cartHeader from '../../img/cartHeader.svg';
 import {Link, useLocation} from 'react-router-dom';
 import Search from '../Search/Search';
 import {useSelector} from 'react-redux';
-import {selectCart} from '../redux/Slices/cartSlice';
+import {selectCart} from '../../redux/Slices/cartSlice';
 
 const Header = () => {
   const {totalPrice, totalCount} = useSelector(selectCart);

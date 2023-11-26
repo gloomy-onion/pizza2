@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cart.module.scss'
 import {Link} from 'react-router-dom';
-import cartEmptyImg from '../img/cartEmptyImg.png'
+import cartEmptyImg from '../../img/cartEmptyImg.png'
 import cn from 'classnames';
 
 const CartEmpty = () => {

@@ -1,9 +1,9 @@
 import React, {useCallback, useRef, useState} from 'react';
 import styles from './Search.module.scss';
-import searchIcon from './../img/searchIcon.svg';
+import searchIcon from '../../img/searchIcon.svg';
 import debounce from 'lodash.debounce';
 import {useDispatch} from 'react-redux';
-import {setSearchValue} from '../redux/Slices/filterSlice';
+import {setSearchValue} from '../../redux/Slices/filterSlice';
 
 const Search = () => {
   const dispatch = useDispatch();
