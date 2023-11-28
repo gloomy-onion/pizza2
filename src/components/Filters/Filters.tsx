@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './Filters.module.scss';
 
+type CategoriesProps = {
+  value: number,
+  onClickCategory: any
+}
 
-const Filters = (props) => {
+const Filters: React.FC<CategoriesProps> = (props) => {
   const {value, onClickCategory} = props;
 
   const categories = [
@@ -14,7 +18,8 @@ const Filters = (props) => {
       <ul>
         {
           categories.map((categoryName, i) => (
-            <li key={i} onClick={() => onClickCategory(i)} className={value === i ? styles.active : ''}>{categoryName}</li>
+            <li key={i} onClick={() => onClickCategory(i)}
+                className={value === i ? styles.active : ''}>{categoryName}</li>
           ))
         }
       </ul>

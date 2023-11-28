@@ -4,10 +4,10 @@ import {sortList} from './constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectSort, setSort} from '../../redux/Slices/filterSlice';
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const onClickList = (sortObj) => {
@@ -15,7 +15,7 @@ const Sort = () => {
     setOpen(false);
   };
 
-  const handleClickOutside = (e) => {
+  const handleClickOutside = (e: any) => {
     const path = e.path || (e.composedPath && e.composedPath());
     if (path && !path.includes(sortRef.current)) {
       setOpen(false);
