@@ -1,5 +1,6 @@
 import React from 'react';
-import MainContent from '../MainContent/MainContent';
+
+import MainContent from '../components/MainContent/MainContent';
 
 const Home = () => {
 
