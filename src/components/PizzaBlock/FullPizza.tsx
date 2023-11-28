@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
-import {API_URL} from '../../common/constants';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { API_URL } from '../../common/constants';
 
 const FullPizza = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [pizza, setPizza] = useState<{
-    imageUrl: string,
-    title: string,
-    price: number,
+    imageUrl: string;
+    title: string;
+    price: number;
   }>({
     imageUrl: '',
     title: '',
@@ -19,7 +20,7 @@ const FullPizza = () => {
   useEffect(() => {
     const fetchPizza = async () => {
       try {
-        const {data} = await axios.get(`${API_URL}pizza/` + id);
+        const { data } = await axios.get(`${API_URL}pizza/${id}`);
         setPizza(data);
       } catch (error) {
         alert('Ошибка');
@@ -30,12 +31,12 @@ const FullPizza = () => {
   }, []);
 
   if (!pizza) {
-    return <>'Загрузка...'</>;
+    return <>Загрузка...</>;
   }
 
   return (
     <div>
-      <img src={pizza.imageUrl} alt={'Pizza im'}/>
+      <img src={pizza.imageUrl} alt={'Pizza im'} />
       <h2>{pizza.title}</h2>
       <h4>{pizza.price}</h4>
     </div>

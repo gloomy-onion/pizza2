@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import styles from './Sort.module.scss';
-import {sortList} from './constants';
 import {useDispatch, useSelector} from 'react-redux';
+
+import styles from './Sort.module.scss';
+import {SortItem, sortList} from './constants';
 import {selectSort, setSort} from '../../redux/Slices/filterSlice';
 
 const Sort: React.FC = () => {
@@ -10,7 +11,7 @@ const Sort: React.FC = () => {
   const sortRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  const onClickList = (sortObj) => {
+  const onClickList = (sortObj: SortItem) => {
     dispatch(setSort(sortObj));
     setOpen(false);
   };

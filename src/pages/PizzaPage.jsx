@@ -1,4 +1,5 @@
 import React from 'react';
+
 import FullPizza from '../components/PizzaBlock/FullPizza';
 
 const PizzaPage = () => {

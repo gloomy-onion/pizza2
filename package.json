@@ -15,7 +15,7 @@
     "classnames": "^2.3.2",
     "lodash.debounce": "^4.0.8",
     "normalize.css": "^8.0.1",
-    "prettier": "^3.0.3",
+    "prettier": "^2.4.1",
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.1",
@@ -24,14 +24,22 @@
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
-    "typescript": "^5.3.2",
+    "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:base": "eslint --ext js,jsx,ts,tsx --quiet",
+    "lint:base:warnings": "eslint --ext js,jsx,ts,tsx",
+    "lint": "npm run lint:base -- ./src",
+    "lint:fix": "npm run lint:base -- --fix",
+    "lint:fixall": "npm run lint -- --fix",
+    "prettier:fix": "prettier \"src//*.{js,jsx,ts,tsx,json,md}\" -l --write",
+    "prettier:check": "prettier \"src//*.{js,jsx,ts,tsx,json,md}\" -l --check",
+    "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +60,17 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.69.5"
+    "@types/lodash.debounce": "^4.0.9",
+    "sass": "^1.69.5",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^3.9.2"
   }
 }

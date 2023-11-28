@@ -1,4 +1,4 @@
-type SortItem = {
+export type SortItem = {
   name: string;
   sortProperty: string;
 }

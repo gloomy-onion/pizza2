@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
+
 import styles from './PizzaBlock.module.scss';
 
 const SkeletonItem = () => (
