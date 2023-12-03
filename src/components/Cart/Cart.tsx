@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 import styles from './Cart.module.scss';
 import CartEmpty from './CartEmpty';
-import CartItem from './CartItem';
+import CartItemBlock from './CartItem';
 import cartImage from '../../img/cartImage.svg';
 import trashBin from '../../img/trashBin.svg';
 import { clearItems, selectCart } from '../../redux/Slices/cartSlice';
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice, totalCount } = useSelector(selectCart);
   const onClickClear = () => {
@@ -38,8 +38,8 @@ const Cart = () => {
               </div>
             </div>
             <div className={styles.content__items}>
-              {items.map((item) => (
-                <CartItem key={item.id} {...item} />
+              {items.map((item: any) => (
+                <CartItemBlock key={item.id} {...item} />
               ))}
             </div>
             <div className={styles.cart__bottom}>

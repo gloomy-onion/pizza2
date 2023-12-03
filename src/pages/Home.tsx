@@ -2,11 +2,10 @@ import React from 'react';
 
 import MainContent from '../components/MainContent/MainContent';
 
-const Home = () => {
-
+const Home: React.FC = () => {
   return (
     <div>
-      <MainContent/>
+      <MainContent />
     </div>
   );
 };
