@@ -2,10 +2,10 @@ import React from 'react';
 
 import FullPizza from '../components/PizzaBlock/FullPizza';
 
-const PizzaPage = () => {
+const PizzaPage: React.FC = () => {
   return (
     <div>
-      <FullPizza/>
+      <FullPizza />
     </div>
   );
 };
