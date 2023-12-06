@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './MainContent.module.scss';
-import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../../redux/Slices/filterSlice';
+import { selectFilter, selectType, setCategoryId, setCurrentPage, setFilters } from "../../redux/Slices/filterSlice";
 import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../../redux/Slices/pizzaSlice';
 import { useAppDispatch } from '../../redux/store';
 import Filters from '../Filters/Filters';
@@ -20,8 +20,7 @@ const MainContent: React.FC = () => {
   const dispatch = useAppDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  // @ts-ignore
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  const sortType = useSelector(selectType);
   const { currentPage, categoryId, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
   const onChangeCategory = (id: number) => {
@@ -72,7 +71,7 @@ const MainContent: React.FC = () => {
           sort: sort || sortList[0],
         }),
       );
-      dispatch(fetchPizzas({} as SearchPizzaParams));
+      dispatch(fetchPizzas());
       isSearch.current = true;
     }
   }, []);
@@ -85,7 +84,7 @@ const MainContent: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzas = items.map((pizza: any) => <PizzaBlock key={pizza.title} {...pizza} pizza={pizza} />);
+  const pizzas = items.map((pizza) => <PizzaBlock key={pizza.title} {...pizza} />);
 
   return (
     <div>

@@ -4,7 +4,7 @@ import styles from './Filters.module.scss';
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: (i: number) => void;
+  onClickCategory: (id: number) => void;
 };
 
 const Filters: React.FC<CategoriesProps> = (props) => {

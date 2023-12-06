@@ -5,6 +5,8 @@ import styles from './Sort.module.scss';
 import { SortItem, sortList } from './constants';
 import { selectSort, setSort } from '../../redux/Slices/filterSlice';
 
+type ComposedPath = () => Node[];
+
 const SortPopup: React.FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
@@ -16,11 +18,10 @@ const SortPopup: React.FC = () => {
     setOpen(false);
   };
 
-  type ComposedPath = () => Node[];
-
   const handleClickOutside = (e: MouseEvent) => {
     const event = e as MouseEvent & {
-      path: Node[]; composedPath?: ComposedPath
+      path: Node[];
+      composedPath?: ComposedPath;
     };
     const path = event.path || (e.composedPath && e.composedPath());
     if (path && !path.includes(sortRef.current as Node)) {

@@ -123,7 +123,7 @@ module.exports = {
     'no-return-assign': 'warn',
     'max-classes-per-file': 'warn',
     'class-methods-use-this': 'warn',
-    'react/jsx-props-no-spreading': 'warn',
+    'react/jsx-props-no-spreading': 'off',
     'react/static-property-placement': 'warn',
     'react/destructuring-assignment': 'warn',
     'react/sort-comp': 'warn',
