@@ -6,18 +6,20 @@ import { API_URL } from '../../common/constants';
 import { RootState } from '../store';
 
 export type SearchPizzaParams = {
-sortBy: string;
-order: string;
-category: string;
-search: string;
-currentPage: string;
-}
+  sortBy: string;
+  order: string;
+  category: string;
+  search: string;
+  currentPage: string;
+};
 
 export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams | undefined>(
   'pizza/fetchPizzasStatus',
   async (params) => {
-    // @ts-ignore
-    // я тут не поняла если честно как делать а дурацкими вопросами заебывать не хочу
+    if (!params) {
+      const { data } = await axios.get<Pizza[]>(`${API_URL}pizza`);
+      return data;
+    }
     const { sortBy, order, search, category, currentPage } = params;
     const { data } = await axios.get<Pizza[]>(
       `${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
