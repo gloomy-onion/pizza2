@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // eslint-disable-next-line import/no-cycle
-import { RootState } from '../store';
 import { sortList } from "../../components/Sort/constants";
+// eslint-disable-next-line import/no-cycle
+import { RootState } from '../store';
 
 export enum SortPropertyEnum {
   TITLE_DESC = 'title',

@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -24,7 +25,7 @@ const CartItemBlock: React.FC<CartItemProps> = (props) => {
     dispatch(minusItem(id));
   };
   const onClickRemove = () => {
-    if (window.confirm('Вы уверены что хотите удалить?')) {
+    if (window.confirm("Вы уверены что хотите удалить?")) {
       dispatch(removeItem(id));
     }
   };
@@ -32,7 +33,7 @@ const CartItemBlock: React.FC<CartItemProps> = (props) => {
   return (
     <div className={styles.cart__item}>
       <div className={styles.cart__item__img}>
-        <img src={imageUrl} alt={''} />
+        <img src={imageUrl} alt={""} />
       </div>
       <div className={styles.cart__item__info}>
         <h3>{title}</h3>
@@ -41,7 +42,8 @@ const CartItemBlock: React.FC<CartItemProps> = (props) => {
         </p>
       </div>
       <div className={styles.cart__item__count}>
-        <button disabled={count === 1} onClick={onClickMinus} className={styles.minusBtn} />
+        <button disabled={count === 1} onClick={onClickMinus}
+                className={cn(styles.minusBtn, styles.disabled)} />
         {count}
         <button onClick={onClickPlus} className={styles.plusBtn} />
       </div>

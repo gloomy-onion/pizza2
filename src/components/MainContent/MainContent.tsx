@@ -1,10 +1,10 @@
 import qs from 'qs';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './MainContent.module.scss';
-import { selectFilter, selectType, setCategoryId, setCurrentPage, setFilters } from "../../redux/Slices/filterSlice";
+import { selectFilter, selectType, setCategoryId, setCurrentPage, setFilters } from '../../redux/Slices/filterSlice';
 import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../../redux/Slices/pizzaSlice';
 import { useAppDispatch } from '../../redux/store';
 import Filters from '../Filters/Filters';
@@ -12,7 +12,7 @@ import NotFoundBlock from '../NotFound/NotFoundBlock';
 import Pagination from '../Pagination/Pagination';
 import PizzaBlock from '../PizzaBlock/PizzaBlock';
 import Skeleton from '../PizzaBlock/Skeleton';
-import SortPopup from '../Sort/Sort';
+import SortPopup from '../Sort/SortPopup';
 import { sortList } from '../Sort/constants';
 
 const MainContent: React.FC = () => {
@@ -23,9 +23,11 @@ const MainContent: React.FC = () => {
   const sortType = useSelector(selectType);
   const { currentPage, categoryId, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
-  const onChangeCategory = (id: number) => {
+
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
+
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
@@ -35,7 +37,6 @@ const MainContent: React.FC = () => {
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const search = searchValue ? `&search=${searchValue}` : '';
-
     dispatch(
       fetchPizzas({
         sortBy,

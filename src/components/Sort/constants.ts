@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { SortPropertyEnum } from '../../redux/Slices/filterSlice';
 
 export type SortItem = {
