@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// eslint-disable-next-line import/no-cycle
+import { calcTotalCount, calcTotalPrice } from '../../utils/calcTotalPriceCount';
+import { getCartFromLS } from '../../utils/getCartFromLS';
 import { RootState } from '../store';
 
 export type CartItem = {
@@ -19,10 +20,12 @@ interface CartSliceState {
   totalCount: number;
 }
 
+const { items, totalPrice, totalCount } = getCartFromLS();
+
 const initialState: CartSliceState = {
-  totalPrice: 0,
-  items: [],
-  totalCount: 0,
+  totalPrice,
+  items,
+  totalCount,
 };
 
 const cartSlice = createSlice({
@@ -39,10 +42,9 @@ const cartSlice = createSlice({
           count: 1,
         });
       }
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
-      state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
+
+      state.totalPrice = calcTotalPrice(state.items);
+      state.totalCount = calcTotalCount(state.items);
     },
     minusItem(state, action: PayloadAction<string>) {
       const findItem = state.items.find((obj) => obj.id === action.payload);

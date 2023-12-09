@@ -45,8 +45,8 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': ['error'],
 
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
-    'import/no-cycle': 'error',
-    'import/no-duplicates': 'off',
+    'import/no-cycle': 'off',
+    'import/no-duplicates': 'error',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/named': 'off',
