@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import { API_URL } from '../../common/constants';
-// eslint-disable-next-line import/no-cycle
 import { RootState } from '../store';
 
 export type SearchPizzaParams = {
@@ -18,12 +17,14 @@ export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams | undefin
   async (params) => {
     if (!params) {
       const { data } = await axios.get<Pizza[]>(`${API_URL}pizza`);
+
       return data;
     }
     const { sortBy, order, search, category, currentPage } = params;
     const { data } = await axios.get<Pizza[]>(
       `${API_URL}pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
     );
+
     return data;
   },
 );

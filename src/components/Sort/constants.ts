@@ -1,5 +1,12 @@
-import { SortPropertyEnum } from '../../redux/Slices/filterSlice';
-
+export enum SortPropertyEnum {
+  TITLE_DESC = 'title',
+  TITLE_ASC = '-title',
+  POPULAR_DESC = 'rating',
+  POPULAR_ASC = '-rating',
+  PRICE_DESC = 'price',
+  PRICE_ASC = '-price',
+}
+// перенесла сюда потому что выскакивала оибка что нельзя его использовать до инициализации
 export type SortItem = {
   name: string;
   sortProperty: SortPropertyEnum;

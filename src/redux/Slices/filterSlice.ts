@@ -1,17 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// eslint-disable-next-line import/no-cycle
+import { sortList, SortPropertyEnum } from '../../components/Sort/constants';
 import { RootState } from '../store';
-import { sortList } from "../../components/Sort/constants";
-
-export enum SortPropertyEnum {
-  TITLE_DESC = 'title',
-  TITLE_ASC = '-title',
-  POPULAR_DESC = 'rating',
-  POPULAR_ASC = '-rating',
-  PRICE_DESC = 'price',
-  PRICE_ASC = '-price',
-}
 
 export type Sort = {
   name: string;
@@ -29,7 +19,7 @@ const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
-  sort: sortList[0] ,
+  sort: sortList[0],
 };
 
 const filterSlice = createSlice({

@@ -7,7 +7,7 @@ import { selectSort, setSort } from '../../redux/Slices/filterSlice';
 
 type ComposedPath = () => Node[];
 
-const SortPopup: React.FC = () => {
+const SortPopup: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -58,6 +58,6 @@ const SortPopup: React.FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default SortPopup;
