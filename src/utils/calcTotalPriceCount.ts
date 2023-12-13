@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-cycle
+
 import { CartItem } from '../redux/Slices/cartSlice';
 
 export const calcTotalPrice = (items: CartItem[]) => {

@@ -98,7 +98,7 @@ module.exports = {
       },
     ],
     'no-underscore-dangle': 'warn',
-    'no-plusplus': 'warn',
+    'no-plusplus': 'off',
     'no-bitwise': 'warn',
     'no-return-await': 'off',
     'operator-assignment': 'warn',

@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// eslint-disable-next-line import/no-cycle
 import { sortList, SortPropertyEnum } from '../../components/Sort/constants';
-// eslint-disable-next-line import/no-cycle
 import { RootState } from '../store';
 
 export type Sort = {

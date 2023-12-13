@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -29,6 +28,7 @@ const CartItemBlock: React.FC<CartItemProps> = (props) => {
       dispatch(removeItem(id));
     }
   };
+  const disabled = count === 1;
 
   return (
     <div className={styles.cart__item}>
@@ -43,7 +43,7 @@ const CartItemBlock: React.FC<CartItemProps> = (props) => {
       </div>
       <div className={styles.cart__item__count}>
         <button disabled={count === 1} onClick={onClickMinus}
-                className={cn(styles.minusBtn, styles.disabled)} />
+                className={disabled ? styles.minusBtn__disabled : styles.minusBtn} />
         {count}
         <button onClick={onClickPlus} className={styles.plusBtn} />
       </div>

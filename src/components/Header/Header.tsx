@@ -15,8 +15,8 @@ const Header = () => {
 
   useEffect(() => {
     if (isMounted.current) {
-      const json = JSON.stringify(items);
-      localStorage.setItem('cart', json);
+      const cartPizzas = JSON.stringify(items);
+      localStorage.setItem('cart', cartPizzas);
     }
     isMounted.current = true;
   }, [items]);
