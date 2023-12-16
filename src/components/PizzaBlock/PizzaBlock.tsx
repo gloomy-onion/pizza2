@@ -9,7 +9,7 @@ import { addItem, CartItem, selectCartItemById } from '../../redux/Slices/cartSl
 type PizzaBlockProps = { id: string; title: string; price: number; imageUrl: string; sizes: number[]; types: number[] };
 const typeNames = ['тонкое', 'традиционное'];
 
-const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
   const { id, title, price, imageUrl, sizes, types } = props;
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
@@ -67,5 +67,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
     </div>
   );
 };
-
-export default PizzaBlock;

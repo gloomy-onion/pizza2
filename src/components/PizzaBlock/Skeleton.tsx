@@ -21,7 +21,7 @@ const SkeletonItem = () => (
   </ContentLoader>
 );
 
-const Skeleton = () => {
+export const Skeleton = () => {
   return (
     <>
       {[...new Array(6)].map((_, index) => (
@@ -30,5 +30,3 @@ const Skeleton = () => {
     </>
   );
 };
-
-export default Skeleton;

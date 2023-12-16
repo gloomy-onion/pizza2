@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FullPizza from '../components/PizzaBlock/FullPizza';
+import { FullPizza } from '../components';
 
 const PizzaPage: React.FC = () => {
   return (

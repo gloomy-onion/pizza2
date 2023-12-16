@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import styles from './PizzaBlock.module.scss';
 import { API_URL } from '../../common/constants';
 
-const FullPizza = () => {
+export const FullPizza = () => {
   const { id } = useParams();
   const [pizza, setPizza] = useState<{
     imageUrl: string;
@@ -39,8 +40,9 @@ const FullPizza = () => {
       <img src={pizza.imageUrl} alt={'Pizza im'} />
       <h2>{pizza.title}</h2>
       <h4>{pizza.price}</h4>
+      <Link to="/" className={styles.button}>
+        <span>Вернуться назад</span>
+      </Link>
     </div>
   );
 };
-
-export default FullPizza;

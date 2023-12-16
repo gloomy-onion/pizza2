@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './Cart.module.scss';
-import CartEmpty from './CartEmpty';
-import CartItemBlock from './CartItem';
 import cartImage from '../../img/cartImage.svg';
 import trashBin from '../../img/trashBin.svg';
 import { clearItems, selectCart } from '../../redux/Slices/cartSlice';
+import { CartEmpty, CartItemBlock } from '../index';
 
-const Cart: React.FC = () => {
+export const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice, totalCount } = useSelector(selectCart);
   const onClickClear = () => {
@@ -69,4 +68,3 @@ const Cart: React.FC = () => {
   );
 };
 
-export default Cart;

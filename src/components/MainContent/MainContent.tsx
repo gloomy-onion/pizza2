@@ -7,13 +7,8 @@ import styles from './MainContent.module.scss';
 import { selectFilter, selectType, setCategoryId, setCurrentPage, setFilters } from '../../redux/Slices/filterSlice';
 import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../../redux/Slices/pizzaSlice';
 import { useAppDispatch } from '../../redux/store';
-import Filters from '../Filters/Filters';
-import NotFoundBlock from '../NotFound/NotFoundBlock';
-import Pagination from '../Pagination/Pagination';
-import PizzaBlock from '../PizzaBlock/PizzaBlock';
-import Skeleton from '../PizzaBlock/Skeleton';
-import SortPopup from '../Sort/SortPopup';
 import { sortList } from '../Sort/constants';
+import { Filters, NotFoundBlock, Pagination, PizzaBlock, Skeleton, SortPopup } from '../index';
 
 const MainContent: React.FC = () => {
   const navigate = useNavigate();

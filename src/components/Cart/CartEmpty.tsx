@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import styles from './Cart.module.scss';
 import cartEmptyImg from '../../img/cartEmptyImg.png';
 
-const CartEmpty: React.FC = () => {
+export const CartEmpty: React.FC = () => {
   return (
     <div className={styles.cart__empty}>
       <h2>
@@ -23,5 +23,3 @@ const CartEmpty: React.FC = () => {
     </div>
   );
 };
-
-export default CartEmpty;
