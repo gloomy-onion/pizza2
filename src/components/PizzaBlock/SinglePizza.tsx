@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './PizzaBlock.module.scss';
 import { API_URL } from '../../common/constants';
 
-export const FullPizza = () => {
+export const SinglePizza = () => {
   const { id } = useParams();
   const [pizza, setPizza] = useState<{
     imageUrl: string;
@@ -32,7 +32,7 @@ export const FullPizza = () => {
   }, []);
 
   if (!pizza) {
-    return <>Загрузка...</>;
+    return <div className={styles.loader}/>;
   }
 
   return (

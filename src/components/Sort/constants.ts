@@ -6,7 +6,7 @@ export enum SortPropertyEnum {
   PRICE_DESC = 'price',
   PRICE_ASC = '-price',
 }
-// перенесла сюда потому что выскакивала оибка что нельзя его использовать до инициализации
+
 export type SortItem = {
   name: string;
   sortProperty: SortPropertyEnum;

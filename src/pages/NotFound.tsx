@@ -3,11 +3,7 @@ import React from 'react';
 import { NotFoundBlock } from '../components';
 
 const NotFound: React.FC = () => {
-  return (
-    <div>
-      <NotFoundBlock />
-    </div>
-  );
+  return <NotFoundBlock />;
 };
 
 export default NotFound;

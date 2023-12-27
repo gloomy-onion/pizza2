@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import styles from './Cart.module.scss';
-import cartEmptyImg from '../../img/cartEmptyImg.png';
+import cartEmptyImg from '../../assets/cartEmptyImg.png';
 
 export const CartEmpty: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ export const CartEmpty: React.FC = () => {
       </p>
       <img src={cartEmptyImg} alt={"Empty cart"} />
       <Link to="/" className={cn(styles.button__black, styles.button)}>
-        <span>Вернуться назад</span>
+        <span>На главную</span>
       </Link>
     </div>
   );

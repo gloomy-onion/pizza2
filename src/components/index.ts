@@ -9,5 +9,5 @@ export * from './Cart/CartEmpty';
 export * from './Search/Search';
 export * from './Header/Header';
 export * from './Cart/Cart';
-export * from './PizzaBlock/FullPizza';
+export * from './PizzaBlock/SinglePizza';
 

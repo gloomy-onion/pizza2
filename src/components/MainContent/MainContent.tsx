@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './MainContent.module.scss';
 import { selectFilter, selectType, setCategoryId, setCurrentPage, setFilters } from '../../redux/Slices/filterSlice';
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../../redux/Slices/pizzaSlice';
+import { fetchPizzas, SearchPizzaParams, selectPizzaData, Status } from "../../redux/Slices/pizzaSlice";
 import { useAppDispatch } from '../../redux/store';
 import { sortList } from '../Sort/constants';
 import { Filters, NotFoundBlock, Pagination, PizzaBlock, Skeleton, SortPopup } from '../index';
@@ -17,7 +17,7 @@ const MainContent: React.FC = () => {
   const isMounted = useRef(false);
   const sortType = useSelector(selectType);
   const { currentPage, categoryId, searchValue } = useSelector(selectFilter);
-  const { items, status } = useSelector(selectPizzaData);
+  const { pizzas, status } = useSelector(selectPizzaData);
 
   const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
@@ -80,7 +80,7 @@ const MainContent: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzas = items.map((pizza) => <PizzaBlock key={pizza.title} {...pizza} />);
+  const renderedPizzas = pizzas.map((pizza) => <PizzaBlock key={pizza.title} {...pizza} />);
 
   return (
     <div>
@@ -90,12 +90,10 @@ const MainContent: React.FC = () => {
       </div>
       <div className={styles.content}>
         <h2 className={styles.content__title}>Все пиццы</h2>
-        {status === 'error' ? (
-          <div>
+        {status === Status.ERROR ? (
             <NotFoundBlock />
-          </div>
         ) : (
-          <div className={styles.content__items}>{status === 'loading' ? <Skeleton /> : pizzas}</div>
+          <div className={styles.content__items}>{status === Status.LOADING ? <Skeleton /> : renderedPizzas}</div>
         )}
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />

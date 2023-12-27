@@ -1,7 +1,7 @@
-import './App.module.scss';
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import styles from './App.module.scss';
 import MainContent from './components/MainContent/MainContent';
 import MainLayout from './layouts/MainLayout';
 
@@ -17,7 +17,7 @@ function App() {
         <Route
           path="pizza/:id"
           element={
-            <Suspense fallback={<div>Идёт загрузка...</div>}>
+            <Suspense fallback={<div className={styles.loader}/>}>
               <PizzaPage />
             </Suspense>
           }
@@ -25,7 +25,7 @@ function App() {
         <Route
           path="cart"
           element={
-            <Suspense fallback={<div>Идёт загрузка...</div>}>
+            <Suspense fallback={<div className={styles.loader}/>}>
               <CartPage />
             </Suspense>
           }
@@ -33,7 +33,7 @@ function App() {
         <Route
           path="*"
           element={
-            <Suspense fallback={<div>Идёт загрузка...</div>}>
+            <Suspense fallback={<div className={styles.loader}/>}>
               <NotFound />
             </Suspense>
           }
