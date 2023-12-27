@@ -3,23 +3,23 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 import styles from './Header.module.scss';
-import cartHeader from '../../img/cartHeader.svg';
-import pizzaLogo from '../../img/pizzaLogo.svg';
+import cartHeader from '../../assets/cartHeader.svg';
+import pizzaLogo from '../../assets/pizzaLogo.svg';
 import { selectCart } from '../../redux/Slices/cartSlice';
-import Search from '../Search/Search';
+import { Search } from '../index';
 
-const Header = () => {
-  const { totalPrice, totalCount, items } = useSelector(selectCart);
+export const Header: React.FC = () => {
+  const { totalPrice, totalCount, cartItems } = useSelector(selectCart);
   const location = useLocation();
   const isMounted = React.useRef(false);
 
   useEffect(() => {
     if (isMounted.current) {
-      const cartPizzas = JSON.stringify(items);
+      const cartPizzas = JSON.stringify(cartItems);
       localStorage.setItem('cart', cartPizzas);
     }
     isMounted.current = true;
-  }, [items]);
+  }, [cartItems]);
 
   return (
     <div className={styles.header}>
@@ -48,5 +48,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;

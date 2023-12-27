@@ -3,12 +3,12 @@ import { CartItem } from '../redux/Slices/cartSlice';
 
 export const getCartFromLS = () => {
   const data = localStorage.getItem('cart');
-  const items: CartItem[] = data ? JSON.parse(data) : [];
-  const totalPrice = calcTotalPrice(items);
-  const totalCount = calcTotalCount(items);
+  const cartItems: CartItem[] = data ? JSON.parse(data) : [];
+  const totalPrice = calcTotalPrice(cartItems);
+  const totalCount = calcTotalCount(cartItems);
 
   return {
-    items,
+    cartItems,
     totalPrice,
     totalCount,
   };

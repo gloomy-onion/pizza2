@@ -1,13 +1,9 @@
 import React from 'react';
 
-import FullPizza from '../components/PizzaBlock/FullPizza';
+import { SinglePizza } from '../components';
 
 const PizzaPage: React.FC = () => {
-  return (
-    <div>
-      <FullPizza />
-    </div>
-  );
+  return <SinglePizza />;
 };
 
 export default PizzaPage;

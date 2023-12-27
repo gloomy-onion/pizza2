@@ -1,13 +1,9 @@
 import React from 'react';
 
-import NotFoundBlock from '../components/NotFound/NotFoundBlock';
+import { NotFoundBlock } from '../components';
 
 const NotFound: React.FC = () => {
-  return (
-    <div>
-      <NotFoundBlock />
-    </div>
-  );
+  return <NotFoundBlock />;
 };
 
 export default NotFound;

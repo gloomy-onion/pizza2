@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './PizzaBlock.module.scss';
-import { addItem, CartItem, selectCartItemById } from '../../redux/Slices/cartSlice';
+import { addCartItem, CartItem, selectCartItemById } from '../../redux/Slices/cartSlice';
 
 type PizzaBlockProps = { id: string; title: string; price: number; imageUrl: string; sizes: number[]; types: number[] };
 const typeNames = ['тонкое', 'традиционное'];
 
-const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
   const { id, title, price, imageUrl, sizes, types } = props;
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
@@ -26,7 +26,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
       size: sizes[activeSize],
       count: 0,
     };
-    dispatch(addItem(item));
+    dispatch(addCartItem(item));
   };
 
   return (
@@ -67,5 +67,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = (props) => {
     </div>
   );
 };
-
-export default PizzaBlock;

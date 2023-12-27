@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Sort.module.scss';
@@ -7,7 +7,7 @@ import { selectSort, setSort } from '../../redux/Slices/filterSlice';
 
 type ComposedPath = () => Node[];
 
-const SortPopup: React.FC = React.memo(() => {
+export const SortPopup: React.FC = memo(() => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -59,5 +59,3 @@ const SortPopup: React.FC = React.memo(() => {
     </div>
   );
 });
-
-export default SortPopup;

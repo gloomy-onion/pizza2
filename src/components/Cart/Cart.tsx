@@ -4,18 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './Cart.module.scss';
-import CartEmpty from './CartEmpty';
-import CartItemBlock from './CartItem';
-import cartImage from '../../img/cartImage.svg';
-import trashBin from '../../img/trashBin.svg';
-import { clearItems, selectCart } from '../../redux/Slices/cartSlice';
+import cartImage from '../../assets/cartImage.svg';
+import trashBin from '../../assets/trashBin.svg';
+import { clearAllCartItems, selectCart } from '../../redux/Slices/cartSlice';
+import { CartEmpty, CartItemBlock } from '../index';
 
-const Cart: React.FC = () => {
+export const Cart: React.FC = () => {
   const dispatch = useDispatch();
-  const { items, totalPrice, totalCount } = useSelector(selectCart);
+  const { cartItems, totalPrice, totalCount } = useSelector(selectCart);
   const onClickClear = () => {
     if (window.confirm('Очистить корзину?')) {
-      dispatch(clearItems());
+      dispatch(clearAllCartItems());
     }
   };
   if (!totalCount) {
@@ -38,19 +37,17 @@ const Cart: React.FC = () => {
               </div>
             </div>
             <div className={styles.content__items}>
-              {items.map((item) => (
+              {cartItems.map((item) => (
                 <CartItemBlock key={item.id} {...item} />
               ))}
             </div>
             <div className={styles.cart__bottom}>
               <div className={styles.cart__bottom_details}>
                 <span>
-                  {' '}
-                  Всего пицц: <b>{totalCount} шт.</b>{' '}
+                  Всего пицц: <b>{totalCount} шт.</b>
                 </span>
                 <span>
-                  {' '}
-                  Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+                  Сумма заказа: <b>{totalPrice} ₽</b>
                 </span>
               </div>
               <div className={styles.cart__bottom_buttons}>
@@ -69,4 +66,3 @@ const Cart: React.FC = () => {
   );
 };
 
-export default Cart;

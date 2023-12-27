@@ -39,6 +39,7 @@ const filterSlice = createSlice({
       state.currentPage = action.payload;
     },
     setFilters(state, action: PayloadAction<FilterSliceState>) {
+      // TODO: зачем обертка Number?
       state.currentPage = Number(action.payload.currentPage);
       state.sort = action.payload.sort;
       state.categoryId = Number(action.payload.categoryId);

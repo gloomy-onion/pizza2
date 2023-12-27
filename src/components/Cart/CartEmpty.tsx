@@ -3,9 +3,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import styles from './Cart.module.scss';
-import cartEmptyImg from '../../img/cartEmptyImg.png';
+import cartEmptyImg from '../../assets/cartEmptyImg.png';
 
-const CartEmpty: React.FC = () => {
+export const CartEmpty: React.FC = () => {
   return (
     <div className={styles.cart__empty}>
       <h2>
@@ -18,10 +18,8 @@ const CartEmpty: React.FC = () => {
       </p>
       <img src={cartEmptyImg} alt={"Empty cart"} />
       <Link to="/" className={cn(styles.button__black, styles.button)}>
-        <span>Вернуться назад</span>
+        <span>На главную</span>
       </Link>
     </div>
   );
 };
-
-export default CartEmpty;

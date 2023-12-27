@@ -8,7 +8,7 @@ type PaginationProps = {
   onChangePage: (page: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = (props) => {
+export const Pagination: React.FC<PaginationProps> = (props) => {
   const { currentPage, onChangePage } = props;
 
   return (
@@ -27,5 +27,3 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     </div>
   );
 };
-
-export default Pagination;
